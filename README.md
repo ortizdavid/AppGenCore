@@ -1,12 +1,11 @@
-# Core for AppGen
+# AppGen Core
 
-## Can be used for AppGenWeb and appgen CLI
+## Its uset by AppGenWeb and AppGenCLI
 
 ## Features
 - Create Python Projects (API and MVC)
 - Create Golang Projects (API and MVC)
 
+## AppGen Architecture
 
-# AppGen Flow
-
-a
+![AppGenCore Architecture](images/Architecture.jpg)
