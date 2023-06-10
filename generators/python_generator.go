@@ -18,60 +18,45 @@ var pyImport *pythonsamples.AppImport
 var readme *helpers.ReadMePy
 
 
-func (python *PythonGenerator) GetAppTypes() []string {
-	types := [] string {"api", "mvc"}
-	return types
-}
-
-
 func (python *PythonGenerator) GenerateApp(appName string, appType string, db string) {
-
-	if helpers.Contains(python.GetAppTypes(), appType) == false {
-		fmt.Printf(helpers.APPLICATION_ERROR)
-		fmt.Printf(helpers.UNSUPORTED_TYPE, appType, "Python")
-		helpers.ListLanguages()
-
-	} else {
-		switch appType {
-		case "mvc":
-			python.GenerateViews(appName)
-			python.GenerateStaticFiles(appName)
-			python.GenerateMvcControllers(appName)
-		case "api":
-			python.GenerateApiControllers(appName)
-			python.GeneratePostmanCollections(appName)
-		}
-		switch db {
-		case "mysql":
-			python.GenerateMySqlDB(appName)
-		case "postgres":
-			python.GeneratePostgresDB(appName)
-		}
-		python.GenerateModels(appName)
-		python.GenerateHelpers(appName)
-		python.GenerateConfig(appName, db)
-		python.GenerateRequirements(appName, db)
-		python.GenerateMain(appName, appType)
-		python.GenerateReadme(appName, db, appType)
-		python.GenerateGitIgnore(appName, appType)
-		python.GenerateUploadsDir(appName)
-		fmt.Printf(helpers.APPLICATION_CREATED, appName)
-		python.PrintInstructions(appName)
+	switch appType {
+	case "mvc":
+		python.generateViews(appName)
+		python.generateStaticFiles(appName)
+		python.generateMvcControllers(appName)
+	case "api":
+		python.generateApiControllers(appName)
+		python.generatePostmanCollections(appName)
 	}
+	switch db {
+	case "mysql":
+		python.generateMySqlDB(appName)
+	case "postgres":
+		python.generatePostgresDB(appName)
+	}
+	python.generateModels(appName)
+	python.generateHelpers(appName)
+	python.generateConfig(appName, db)
+	python.generateRequirements(appName, db)
+	python.generateMain(appName, appType)
+	python.generateReadme(appName, db, appType)
+	python.generateGitIgnore(appName, appType)
+	python.generateUploadsDir(appName)
+	python.printInstructions(appName)
 }
 
 
-func (python *PythonGenerator) GenerateUploadsDir(rootDir string) {
+func (python *PythonGenerator) generateUploadsDir(rootDir string) {
 	pyFileManager.CreateManyFolders(rootDir+"/static/uploads/imgs")
 	pyFileManager.CreateManyFolders(rootDir+"/static/uploads/docs")
 }
 
 
-func (python *PythonGenerator) PrintInstructions(appName string) {
+func (python *PythonGenerator) printInstructions(appName string) {
 	fmt.Println(readme.InstrunctionsBeforeRun(appName))
 }
 
-func (python *PythonGenerator) GenerateConfig(rootDir string, db string) {
+func (python *PythonGenerator) generateConfig(rootDir string, db string) {
 	var config *pythonsamples.ConfigPy
 	file := "config.py"
 	pyFileManager.CreateSigleFile(rootDir, file)
@@ -80,7 +65,7 @@ func (python *PythonGenerator) GenerateConfig(rootDir string, db string) {
 }
 
 
-func (python *PythonGenerator) GenerateReadme(rootDir string, db string, appType string) {
+func (python *PythonGenerator) generateReadme(rootDir string, db string, appType string) {
 	file := "README.md"
 	pyFileManager.CreateSigleFile(rootDir, file)
 	switch appType {
@@ -92,7 +77,7 @@ func (python *PythonGenerator) GenerateReadme(rootDir string, db string, appType
 }
 
 
-func (python *PythonGenerator) GenerateGitIgnore(rootDir string, appType string) {
+func (python *PythonGenerator) generateGitIgnore(rootDir string, appType string) {
 	var ignore *helpers.GitIgnorePy
 	file := ".gitignore"
 	pyFileManager.CreateSigleFile(rootDir, file)
@@ -105,7 +90,7 @@ func (python *PythonGenerator) GenerateGitIgnore(rootDir string, appType string)
 }
 
 
-func (python *PythonGenerator) GenerateMain(rootDir string, appType string) {
+func (python *PythonGenerator) generateMain(rootDir string, appType string) {
 	file := "app.py"
 	pyFileManager.CreateSigleFile(rootDir, file)
 	switch appType {
@@ -118,7 +103,7 @@ func (python *PythonGenerator) GenerateMain(rootDir string, appType string) {
 }
 
 
-func (python *PythonGenerator) GenerateMySqlDB(rootDir string) {
+func (python *PythonGenerator) generateMySqlDB(rootDir string) {
 	var mysql *dbsamples.MySqlDB
 	dbDir := rootDir+"/database"
 	file := "db_task.sql"
@@ -128,7 +113,7 @@ func (python *PythonGenerator) GenerateMySqlDB(rootDir string) {
 }
 
 
-func (python *PythonGenerator) GeneratePostgresDB(rootDir string) {
+func (python *PythonGenerator) generatePostgresDB(rootDir string) {
 	var postgres *dbsamples.PostgresDB
 	dbDir := rootDir+"/database"
 	file := "db_task.sql"
@@ -138,14 +123,14 @@ func (python *PythonGenerator) GeneratePostgresDB(rootDir string) {
 }
 
 
-func (python *PythonGenerator) GenerateRequirements(rootDir string, db string) {
+func (python *PythonGenerator) generateRequirements(rootDir string, db string) {
 	var deps *scripts.PythonDeps
 	file := "requirements.txt"
 	pyFileManager.CreateSigleFile(rootDir, file)
 	pyFileManager.WriteFile(rootDir, file, deps.Requirements(db))
 }
 
-func (python *PythonGenerator) GeneratePostmanCollections(rootDir string) {
+func (python *PythonGenerator) generatePostmanCollections(rootDir string) {
 	var postman *collectionsamples.Postman
 	collectionsFolder := rootDir+"/__postman_collections__"
 	collection := "postman_collection.json"
@@ -157,7 +142,7 @@ func (python *PythonGenerator) GeneratePostmanCollections(rootDir string) {
 }
 
 
-func (python *PythonGenerator) GenerateHelpers(rootDir string) {
+func (python *PythonGenerator) generateHelpers(rootDir string) {
 	var helper *pythonsamples.Helper
 	helpersFolder := rootDir+"/helpers"
 	httpFile := "http_code.py"
@@ -176,7 +161,7 @@ func (python *PythonGenerator) GenerateHelpers(rootDir string) {
 }
 
 
-func (python *PythonGenerator) GenerateModels(rootDir string) {
+func (python *PythonGenerator) generateModels(rootDir string) {
 	var model *pythonsamples.Model
 	modelsFolder := rootDir+"/models"
 	roleFile := "role.py"
@@ -192,7 +177,7 @@ func (python *PythonGenerator) GenerateModels(rootDir string) {
 }
 
 
-func (python *PythonGenerator) GenerateStaticFiles(rootDir string) {
+func (python *PythonGenerator) generateStaticFiles(rootDir string) {
 	var staticFile *libs.StaticFile
 	var bootstrap *libs.BootstrapLib
 	var jquery *libs.JqueryLib
@@ -229,7 +214,7 @@ func (python *PythonGenerator) GenerateStaticFiles(rootDir string) {
 }
 
 
-func (python *PythonGenerator) GenerateMvcControllers(rootDir string) {
+func (python *PythonGenerator) generateMvcControllers(rootDir string) {
 	var mvcController *pythonsamples.MvcController
 	controllersFolder := rootDir+"/controllers"
 	roleFile := "role_controller.py"
@@ -251,7 +236,7 @@ func (python *PythonGenerator) GenerateMvcControllers(rootDir string) {
 }
 
 
-func (python *PythonGenerator) GenerateApiControllers(rootDir string) {
+func (python *PythonGenerator) generateApiControllers(rootDir string) {
 	var apiController *pythonsamples.ApiController
 	apiControllersFolder := rootDir+"/api_controllers"
 	roleFile := "role_api.py"
@@ -273,7 +258,7 @@ func (python *PythonGenerator) GenerateApiControllers(rootDir string) {
 }
 
 
-func (python *PythonGenerator) GenerateViews(rootDir string) {
+func (python *PythonGenerator) generateViews(rootDir string) {
 
 	var layout *pythonsamples.Layout
 	var perr *pythonsamples.PageError

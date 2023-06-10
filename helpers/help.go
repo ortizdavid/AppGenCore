@@ -66,7 +66,22 @@ func PrintHelp()  {
 
 func ListLanguages() {
 	fmt.Println("\nSUPORTED LANGUAGES:")
-	fmt.Println("\tLang\tprojects")
-	fmt.Println("\tpython\tmvc, api")
+	fmt.Println("\tpython")
+	fmt.Println("\tphp")
+	fmt.Println("\tgo")
+	fmt.Println()
+}
+
+func ListDataBases() {
+	fmt.Println("\nSUPORTED DATABASES:")
+	fmt.Println("\tMySQL")
+	fmt.Println("\tPostgreSQL")
+	fmt.Println()
+}
+
+func ListTypes() {
+	fmt.Println("\nSUPORTED APPLICATION TYPES:")
+	fmt.Println("\tmvc")
+	fmt.Println("\tapi")
 	fmt.Println()
 }

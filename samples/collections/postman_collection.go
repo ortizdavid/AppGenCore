@@ -7,7 +7,7 @@ return `{
 	"info": {
 		"_postman_id": "d5b15e98-ee83-4ecd-94b2-6a330eb421e9",
 		"name": "`+appName+`",
-		"description": "# Task Management App\n\n## Description\n\nThis API Allows user manage his own daily tasks.\n\n## Features\n\n- Add tasks\n- Add Users\n- Add User roles\n- Upload image\n- Login\n- Logout",
+		"description": "# `+appName+` App\n\n## Description\n\nThis API Allows user manage his own daily tasks.\n\n## Features\n\n- Add tasks\n- Add Users\n- Add User roles\n- Upload image\n- Login\n- Logout",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
