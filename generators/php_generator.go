@@ -1,7 +1,7 @@
 package generators
 
 import (
-	"github.com/ortizdavid/filemanager/core"
+	"github.com/ortizdavid/go-nopain/filemanager"
 	//"github.com/ortizdavid/AppGenCore/helpers"
 	//dbsamples "github.com/ortizdavid/AppGenCore/samples/db"
 	phpsamples "github.com/ortizdavid/AppGenCore/samples/php"
@@ -10,7 +10,7 @@ import (
 
 type PhpGenerator struct {}
 
-var phpFileManager *core.FileManager
+var phpFileManager *filemanager.FileManager
 var phpImport *phpsamples.AppImport
 
 
@@ -58,7 +58,7 @@ func (php *PhpGenerator) printInstructions(appName string) {
 func (php *PhpGenerator) generateConfig(rootDir string, db string) {
 	var config *phpsamples.ConfigGo
 	file := "config.php"
-	goFileManager.CreateSigleFile(rootDir, file)
+	goFileManager.CreateSingleFile(rootDir, file)
 	goFileManager.WriteFile(rootDir, file, goImport.ImportForConfig())
 	goFileManager.WriteFile(rootDir, file, config.CreateConfig(db))
 }
@@ -66,7 +66,7 @@ func (php *PhpGenerator) generateConfig(rootDir string, db string) {
 
 func (php *PhpGenerator) generateReadme(rootDir string, db string, appType string) {
 	file := "README.md"
-	goFileManager.CreateSigleFile(rootDir, file)
+	goFileManager.CreateSingleFile(rootDir, file)
 	switch appType {
 	case "mvc":
 		goFileManager.WriteFile(rootDir, file, readme.ReadmeMVC(db))
@@ -79,7 +79,7 @@ func (php *PhpGenerator) generateReadme(rootDir string, db string, appType strin
 func (php *PhpGenerator) generateGitIgnore(rootDir string, appType string) {
 	var ignore *helpers.GitIgnoreGo
 	file := ".gitignore"
-	goFileManager.CreateSigleFile(rootDir, file)
+	goFileManager.CreateSingleFile(rootDir, file)
 	switch appType {
 	case "mvc":
 		goFileManager.WriteFile(rootDir, file, ignore.GitIgnoreMvc())
@@ -91,7 +91,7 @@ func (php *PhpGenerator) generateGitIgnore(rootDir string, appType string) {
 
 func (php *PhpGenerator) generateMain(rootDir string, appType string) {
 	file := "app.php"
-	goFileManager.CreateSigleFile(rootDir, file)
+	goFileManager.CreateSingleFile(rootDir, file)
 	switch appType {
 	case "mvc":
 		goFileManager.WriteFile(rootDir, file, goImport.ImportForMvcApp())
@@ -107,7 +107,7 @@ func (php *PhpGenerator) generateMySqlDB(rootDir string) {
 	dbDir := rootDir+"/database"
 	file := "db_task.sql"
 	goFileManager.CreateManyFolders(dbDir)
-	goFileManager.CreateSigleFile(dbDir, file)
+	goFileManager.CreateSingleFile(dbDir, file)
 	goFileManager.WriteFile(dbDir, file, mysql.GetDatabaseScript())
 }
 
@@ -117,7 +117,7 @@ func (php *PhpGenerator) generatePostgresDB(rootDir string) {
 	dbDir := rootDir+"/database"
 	file := "db_task.sql"
 	goFileManager.CreateManyFolders(dbDir)
-	goFileManager.CreateSigleFile(dbDir, file)
+	goFileManager.CreateSingleFile(dbDir, file)
 	goFileManager.WriteFile(dbDir, file, postgres.GetDatabaseScript())
 }
 
@@ -125,7 +125,7 @@ func (php *PhpGenerator) generatePostgresDB(rootDir string) {
 func (php *PhpGenerator) generateRequirements(rootDir string, db string) {
 	var deps *scripts.GothonDeps
 	file := "requirements.txt"
-	goFileManager.CreateSigleFile(rootDir, file)
+	goFileManager.CreateSingleFile(rootDir, file)
 	goFileManager.WriteFile(rootDir, file, deps.Requirements(db))
 }
 
@@ -149,10 +149,10 @@ func (php *PhpGenerator) generateHelpers(rootDir string) {
 	uploaderFile := "file_uploader.php"
 	passwordHandlerFile := "password_handler.php"
 	goFileManager.CreateManyFolders(helpersFolder)
-	goFileManager.CreateSigleFile(helpersFolder, httpFile)
-	goFileManager.CreateSigleFile(helpersFolder, constFile)
-	goFileManager.CreateSigleFile(helpersFolder, uploaderFile)
-	goFileManager.CreateSigleFile(helpersFolder, passwordHandlerFile)
+	goFileManager.CreateSingleFile(helpersFolder, httpFile)
+	goFileManager.CreateSingleFile(helpersFolder, constFile)
+	goFileManager.CreateSingleFile(helpersFolder, uploaderFile)
+	goFileManager.CreateSingleFile(helpersFolder, passwordHandlerFile)
 	goFileManager.WriteFile(helpersFolder, httpFile, helper.HttpCodes())
 	goFileManager.WriteFile(helpersFolder, constFile, helper.Constants())
 	goFileManager.WriteFile(helpersFolder, uploaderFile, helper.FileUploader())
@@ -167,9 +167,9 @@ func (php *PhpGenerator) generateModels(rootDir string) {
 	userFile := "user.php"
 	taskFile := "task.php"
 	goFileManager.CreateManyFolders(modelsFolder)
-	goFileManager.CreateSigleFile(modelsFolder, roleFile)
-	goFileManager.CreateSigleFile(modelsFolder, taskFile)
-	goFileManager.CreateSigleFile(modelsFolder, userFile)
+	goFileManager.CreateSingleFile(modelsFolder, roleFile)
+	goFileManager.CreateSingleFile(modelsFolder, taskFile)
+	goFileManager.CreateSingleFile(modelsFolder, userFile)
 	goFileManager.WriteFile(modelsFolder, roleFile, model.RoleModel())
 	goFileManager.WriteFile(modelsFolder, userFile, model.UserModel())
 	goFileManager.WriteFile(modelsFolder, taskFile, model.TaskModel())
@@ -200,11 +200,11 @@ func (php *PhpGenerator) generateStaticFiles(rootDir string) {
 	goFileManager.CreateManyFolders(staticLibBootstrapCss)
 	goFileManager.CreateManyFolders(staticLibBootstrapJs)
 	goFileManager.CreateManyFolders(staticLibJquery)
-	goFileManager.CreateSigleFile(staticCss, cssFile)
-	goFileManager.CreateSigleFile(staticJs, jsFile)
-	goFileManager.CreateSigleFile(staticLibBootstrapCss, bootstrapCssFile)
-	goFileManager.CreateSigleFile(staticLibBootstrapJs, bootstrapJsFile)
-	goFileManager.CreateSigleFile(staticLibJquery, jqueryJsFile)
+	goFileManager.CreateSingleFile(staticCss, cssFile)
+	goFileManager.CreateSingleFile(staticJs, jsFile)
+	goFileManager.CreateSingleFile(staticLibBootstrapCss, bootstrapCssFile)
+	goFileManager.CreateSingleFile(staticLibBootstrapJs, bootstrapJsFile)
+	goFileManager.CreateSingleFile(staticLibJquery, jqueryJsFile)
 	goFileManager.WriteFile(staticCss, cssFile, staticFile.CssContent())
 	goFileManager.WriteFile(staticJs, jsFile, staticFile.JsContent())
 	goFileManager.WriteFile(staticLibBootstrapCss, bootstrapCssFile, bootstrap.BootstrapMinCss())
@@ -222,11 +222,11 @@ func (php *PhpGenerator) generateMvcControllers(rootDir string) {
 	authFile := "auth_controller.php"
 	frontFile := "front_controller.php"
 	goFileManager.CreateManyFolders(controllersFolder)
-	goFileManager.CreateSigleFile(controllersFolder, roleFile)
-	goFileManager.CreateSigleFile(controllersFolder, taskFile)
-	goFileManager.CreateSigleFile(controllersFolder, userFile)
-	goFileManager.CreateSigleFile(controllersFolder, authFile)
-	goFileManager.CreateSigleFile(controllersFolder, frontFile)
+	goFileManager.CreateSingleFile(controllersFolder, roleFile)
+	goFileManager.CreateSingleFile(controllersFolder, taskFile)
+	goFileManager.CreateSingleFile(controllersFolder, userFile)
+	goFileManager.CreateSingleFile(controllersFolder, authFile)
+	goFileManager.CreateSingleFile(controllersFolder, frontFile)
 	goFileManager.WriteFile(controllersFolder, roleFile, mvcController.RoleController())
 	goFileManager.WriteFile(controllersFolder, userFile, mvcController.UserController())
 	goFileManager.WriteFile(controllersFolder, taskFile, mvcController.TaskController())
@@ -244,11 +244,11 @@ func (php *PhpGenerator) generateApiControllers(rootDir string) {
 	authFile := "auth_api.php"
 	rootFile := "root_api.php"
 	goFileManager.CreateManyFolders(apiControllersFolder)
-	goFileManager.CreateSigleFile(apiControllersFolder, roleFile)
-	goFileManager.CreateSigleFile(apiControllersFolder, taskFile)
-	goFileManager.CreateSigleFile(apiControllersFolder, userFile)
-	goFileManager.CreateSigleFile(apiControllersFolder, authFile)
-	goFileManager.CreateSigleFile(apiControllersFolder, rootFile)
+	goFileManager.CreateSingleFile(apiControllersFolder, roleFile)
+	goFileManager.CreateSingleFile(apiControllersFolder, taskFile)
+	goFileManager.CreateSingleFile(apiControllersFolder, userFile)
+	goFileManager.CreateSingleFile(apiControllersFolder, authFile)
+	goFileManager.CreateSingleFile(apiControllersFolder, rootFile)
 	goFileManager.WriteFile(apiControllersFolder, roleFile, apiController.RoleApiController())
 	goFileManager.WriteFile(apiControllersFolder, userFile, apiController.UserApiController())
 	goFileManager.WriteFile(apiControllersFolder, taskFile, apiController.TaskApiController())
@@ -318,7 +318,7 @@ func (php *PhpGenerator) generateViews(rootDir string) {
 	goFileManager.CreateManyFolders(errorFolder)
 	
 	goFileManager.CreateManyFiles(errorFolder, err404File, err404MenuFile)
-	goFileManager.CreateSigleFile(frontFolder, indexFile)
+	goFileManager.CreateSingleFile(frontFolder, indexFile)
 	goFileManager.CreateManyFiles(authFolder, loginFile, homeFile)
 	goFileManager.CreateManyFiles(layoutsFolder, frontLayoutFile, backLayoutFile, normalMenuFile, adminMenuFile)
 	goFileManager.CreateManyFiles(roleFolder, roleAddFile, roleShowFile, roleDetailsFile)

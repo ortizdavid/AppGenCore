@@ -1,7 +1,7 @@
 package generators
 
 import (
-	"github.com/ortizdavid/filemanager/core"
+	"github.com/ortizdavid/go-nopain/filemanager"
 	"github.com/ortizdavid/AppGenCore/helpers"
 	//dbsamples "github.com/ortizdavid/AppGenCore/samples/db"
 	golangsamples "github.com/ortizdavid/AppGenCore/samples/golang"
@@ -10,7 +10,7 @@ import (
 
 type GolangGenerator struct {}
 
-var goFileManager *core.FileManager
+var goFileManager *filemanager.FileManager
 var goImport *golangsamples.AppImport
 var readmeGo *helpers.ReadMeGo
 
@@ -59,7 +59,7 @@ func (golang *GolangGenerator) printInstructions(appName string) {
 func (golang *GolangGenerator) generateConfig(rootDir string, db string) {
 	var config *golangsamples.ConfigGo
 	file := "config.go"
-	goFileManager.CreateSigleFile(rootDir, file)
+	goFileManager.CreateSingleFile(rootDir, file)
 	goFileManager.WriteFile(rootDir, file, goImport.ImportForConfig())
 	goFileManager.WriteFile(rootDir, file, config.CreateConfig(db))
 }
@@ -67,7 +67,7 @@ func (golang *GolangGenerator) generateConfig(rootDir string, db string) {
 
 func (golang *GolangGenerator) generateReadme(rootDir string, db string, appType string) {
 	file := "README.md"
-	goFileManager.CreateSigleFile(rootDir, file)
+	goFileManager.CreateSingleFile(rootDir, file)
 	switch appType {
 	case "mvc":
 		goFileManager.WriteFile(rootDir, file, readme.ReadmeMVC(db))
@@ -80,7 +80,7 @@ func (golang *GolangGenerator) generateReadme(rootDir string, db string, appType
 func (golang *GolangGenerator) generateGitIgnore(rootDir string, appType string) {
 	var ignore *helpers.GitIgnoreGo
 	file := ".gitignore"
-	goFileManager.CreateSigleFile(rootDir, file)
+	goFileManager.CreateSingleFile(rootDir, file)
 	switch appType {
 	case "mvc":
 		goFileManager.WriteFile(rootDir, file, ignore.GitIgnoreMvc())
@@ -92,7 +92,7 @@ func (golang *GolangGenerator) generateGitIgnore(rootDir string, appType string)
 
 func (golang *GolangGenerator) generateMain(rootDir string, appType string) {
 	file := "app.go"
-	goFileManager.CreateSigleFile(rootDir, file)
+	goFileManager.CreateSingleFile(rootDir, file)
 	switch appType {
 	case "mvc":
 		goFileManager.WriteFile(rootDir, file, goImport.ImportForMvcApp())
@@ -108,7 +108,7 @@ func (golang *GolangGenerator) generateMySqlDB(rootDir string) {
 	dbDir := rootDir+"/database"
 	file := "db_task.sql"
 	goFileManager.CreateManyFolders(dbDir)
-	goFileManager.CreateSigleFile(dbDir, file)
+	goFileManager.CreateSingleFile(dbDir, file)
 	goFileManager.WriteFile(dbDir, file, mysql.GetDatabaseScript())
 }
 
@@ -118,7 +118,7 @@ func (golang *GolangGenerator) generatePostgresDB(rootDir string) {
 	dbDir := rootDir+"/database"
 	file := "db_task.sql"
 	goFileManager.CreateManyFolders(dbDir)
-	goFileManager.CreateSigleFile(dbDir, file)
+	goFileManager.CreateSingleFile(dbDir, file)
 	goFileManager.WriteFile(dbDir, file, postgres.GetDatabaseScript())
 }
 
@@ -126,7 +126,7 @@ func (golang *GolangGenerator) generatePostgresDB(rootDir string) {
 func (golang *GolangGenerator) generateRequirements(rootDir string, db string) {
 	var deps *scripts.GothonDeps
 	file := "requirements.txt"
-	goFileManager.CreateSigleFile(rootDir, file)
+	goFileManager.CreateSingleFile(rootDir, file)
 	goFileManager.WriteFile(rootDir, file, deps.Requirements(db))
 }
 
@@ -150,10 +150,10 @@ func (golang *GolangGenerator) generateHelpers(rootDir string) {
 	uploaderFile := "file_uploader.go"
 	passwordHandlerFile := "password_handler.go"
 	goFileManager.CreateManyFolders(helpersFolder)
-	goFileManager.CreateSigleFile(helpersFolder, httpFile)
-	goFileManager.CreateSigleFile(helpersFolder, constFile)
-	goFileManager.CreateSigleFile(helpersFolder, uploaderFile)
-	goFileManager.CreateSigleFile(helpersFolder, passwordHandlerFile)
+	goFileManager.CreateSingleFile(helpersFolder, httpFile)
+	goFileManager.CreateSingleFile(helpersFolder, constFile)
+	goFileManager.CreateSingleFile(helpersFolder, uploaderFile)
+	goFileManager.CreateSingleFile(helpersFolder, passwordHandlerFile)
 	goFileManager.WriteFile(helpersFolder, httpFile, helper.HttpCodes())
 	goFileManager.WriteFile(helpersFolder, constFile, helper.Constants())
 	goFileManager.WriteFile(helpersFolder, uploaderFile, helper.FileUploader())
@@ -168,9 +168,9 @@ func (golang *GolangGenerator) generateModels(rootDir string) {
 	userFile := "user.go"
 	taskFile := "task.go"
 	goFileManager.CreateManyFolders(modelsFolder)
-	goFileManager.CreateSigleFile(modelsFolder, roleFile)
-	goFileManager.CreateSigleFile(modelsFolder, taskFile)
-	goFileManager.CreateSigleFile(modelsFolder, userFile)
+	goFileManager.CreateSingleFile(modelsFolder, roleFile)
+	goFileManager.CreateSingleFile(modelsFolder, taskFile)
+	goFileManager.CreateSingleFile(modelsFolder, userFile)
 	goFileManager.WriteFile(modelsFolder, roleFile, model.RoleModel())
 	goFileManager.WriteFile(modelsFolder, userFile, model.UserModel())
 	goFileManager.WriteFile(modelsFolder, taskFile, model.TaskModel())
@@ -201,11 +201,11 @@ func (golang *GolangGenerator) generateStaticFiles(rootDir string) {
 	goFileManager.CreateManyFolders(staticLibBootstrapCss)
 	goFileManager.CreateManyFolders(staticLibBootstrapJs)
 	goFileManager.CreateManyFolders(staticLibJquery)
-	goFileManager.CreateSigleFile(staticCss, cssFile)
-	goFileManager.CreateSigleFile(staticJs, jsFile)
-	goFileManager.CreateSigleFile(staticLibBootstrapCss, bootstrapCssFile)
-	goFileManager.CreateSigleFile(staticLibBootstrapJs, bootstrapJsFile)
-	goFileManager.CreateSigleFile(staticLibJquery, jqueryJsFile)
+	goFileManager.CreateSingleFile(staticCss, cssFile)
+	goFileManager.CreateSingleFile(staticJs, jsFile)
+	goFileManager.CreateSingleFile(staticLibBootstrapCss, bootstrapCssFile)
+	goFileManager.CreateSingleFile(staticLibBootstrapJs, bootstrapJsFile)
+	goFileManager.CreateSingleFile(staticLibJquery, jqueryJsFile)
 	goFileManager.WriteFile(staticCss, cssFile, staticFile.CssContent())
 	goFileManager.WriteFile(staticJs, jsFile, staticFile.JsContent())
 	goFileManager.WriteFile(staticLibBootstrapCss, bootstrapCssFile, bootstrap.BootstrapMinCss())
@@ -223,11 +223,11 @@ func (golang *GolangGenerator) generateMvcControllers(rootDir string) {
 	authFile := "auth_controller.go"
 	frontFile := "front_controller.go"
 	goFileManager.CreateManyFolders(controllersFolder)
-	goFileManager.CreateSigleFile(controllersFolder, roleFile)
-	goFileManager.CreateSigleFile(controllersFolder, taskFile)
-	goFileManager.CreateSigleFile(controllersFolder, userFile)
-	goFileManager.CreateSigleFile(controllersFolder, authFile)
-	goFileManager.CreateSigleFile(controllersFolder, frontFile)
+	goFileManager.CreateSingleFile(controllersFolder, roleFile)
+	goFileManager.CreateSingleFile(controllersFolder, taskFile)
+	goFileManager.CreateSingleFile(controllersFolder, userFile)
+	goFileManager.CreateSingleFile(controllersFolder, authFile)
+	goFileManager.CreateSingleFile(controllersFolder, frontFile)
 	goFileManager.WriteFile(controllersFolder, roleFile, mvcController.RoleController())
 	goFileManager.WriteFile(controllersFolder, userFile, mvcController.UserController())
 	goFileManager.WriteFile(controllersFolder, taskFile, mvcController.TaskController())
@@ -245,11 +245,11 @@ func (golang *GolangGenerator) generateApiControllers(rootDir string) {
 	authFile := "auth_api.go"
 	rootFile := "root_api.go"
 	goFileManager.CreateManyFolders(apiControllersFolder)
-	goFileManager.CreateSigleFile(apiControllersFolder, roleFile)
-	goFileManager.CreateSigleFile(apiControllersFolder, taskFile)
-	goFileManager.CreateSigleFile(apiControllersFolder, userFile)
-	goFileManager.CreateSigleFile(apiControllersFolder, authFile)
-	goFileManager.CreateSigleFile(apiControllersFolder, rootFile)
+	goFileManager.CreateSingleFile(apiControllersFolder, roleFile)
+	goFileManager.CreateSingleFile(apiControllersFolder, taskFile)
+	goFileManager.CreateSingleFile(apiControllersFolder, userFile)
+	goFileManager.CreateSingleFile(apiControllersFolder, authFile)
+	goFileManager.CreateSingleFile(apiControllersFolder, rootFile)
 	goFileManager.WriteFile(apiControllersFolder, roleFile, apiController.RoleApiController())
 	goFileManager.WriteFile(apiControllersFolder, userFile, apiController.UserApiController())
 	goFileManager.WriteFile(apiControllersFolder, taskFile, apiController.TaskApiController())
@@ -319,7 +319,7 @@ func (golang *GolangGenerator) generateViews(rootDir string) {
 	goFileManager.CreateManyFolders(errorFolder)
 	
 	goFileManager.CreateManyFiles(errorFolder, err404File, err404MenuFile)
-	goFileManager.CreateSigleFile(frontFolder, indexFile)
+	goFileManager.CreateSingleFile(frontFolder, indexFile)
 	goFileManager.CreateManyFiles(authFolder, loginFile, homeFile)
 	goFileManager.CreateManyFiles(layoutsFolder, frontLayoutFile, backLayoutFile, normalMenuFile, adminMenuFile)
 	goFileManager.CreateManyFiles(roleFolder, roleAddFile, roleShowFile, roleDetailsFile)

@@ -1,5 +1,5 @@
 module github.com/ortizdavid/AppGenCore
 
-go 1.20
+go 1.21.4
 
-require github.com/ortizdavid/filemanager v0.0.0-20230609123704-0aea4bc8d468
+require github.com/ortizdavid/go-nopain v0.0.0-20231127115401-ac022d8649d2

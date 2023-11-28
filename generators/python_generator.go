@@ -2,7 +2,7 @@ package generators
 
 import (
 	"fmt"
-	"github.com/ortizdavid/filemanager/core"
+	"github.com/ortizdavid/go-nopain/filemanager"
 	"github.com/ortizdavid/AppGenCore/helpers"
 	"github.com/ortizdavid/AppGenCore/samples/collections"
 	dbsamples "github.com/ortizdavid/AppGenCore/samples/db"
@@ -13,7 +13,7 @@ import (
 
 type PythonGenerator struct {}
 
-var pyFileManager *core.FileManager
+var pyFileManager *filemanager.FileManager
 var pyImport *pythonsamples.AppImport
 var readme *helpers.ReadMePy
 
@@ -59,7 +59,7 @@ func (python *PythonGenerator) printInstructions(appName string) {
 func (python *PythonGenerator) generateConfig(rootDir string, db string) {
 	var config *pythonsamples.ConfigPy
 	file := "config.py"
-	pyFileManager.CreateSigleFile(rootDir, file)
+	pyFileManager.CreateSingleFile(rootDir, file)
 	pyFileManager.WriteFile(rootDir, file, pyImport.ImportForConfig())
 	pyFileManager.WriteFile(rootDir, file, config.CreateConfig(db))
 }
@@ -67,7 +67,7 @@ func (python *PythonGenerator) generateConfig(rootDir string, db string) {
 
 func (python *PythonGenerator) generateReadme(rootDir string, db string, appType string) {
 	file := "README.md"
-	pyFileManager.CreateSigleFile(rootDir, file)
+	pyFileManager.CreateSingleFile(rootDir, file)
 	switch appType {
 	case "mvc":
 		pyFileManager.WriteFile(rootDir, file, readme.ReadmeMVC(db))
@@ -80,7 +80,7 @@ func (python *PythonGenerator) generateReadme(rootDir string, db string, appType
 func (python *PythonGenerator) generateGitIgnore(rootDir string, appType string) {
 	var ignore *helpers.GitIgnorePy
 	file := ".gitignore"
-	pyFileManager.CreateSigleFile(rootDir, file)
+	pyFileManager.CreateSingleFile(rootDir, file)
 	switch appType {
 	case "mvc":
 		pyFileManager.WriteFile(rootDir, file, ignore.GitIgnoreMvc())
@@ -92,7 +92,7 @@ func (python *PythonGenerator) generateGitIgnore(rootDir string, appType string)
 
 func (python *PythonGenerator) generateMain(rootDir string, appType string) {
 	file := "app.py"
-	pyFileManager.CreateSigleFile(rootDir, file)
+	pyFileManager.CreateSingleFile(rootDir, file)
 	switch appType {
 	case "mvc":
 		pyFileManager.WriteFile(rootDir, file, pyImport.ImportForMvcApp())
@@ -108,7 +108,7 @@ func (python *PythonGenerator) generateMySqlDB(rootDir string) {
 	dbDir := rootDir+"/database"
 	file := "db_task.sql"
 	pyFileManager.CreateManyFolders(dbDir)
-	pyFileManager.CreateSigleFile(dbDir, file)
+	pyFileManager.CreateSingleFile(dbDir, file)
 	pyFileManager.WriteFile(dbDir, file, mysql.GetDatabaseScript())
 }
 
@@ -118,7 +118,7 @@ func (python *PythonGenerator) generatePostgresDB(rootDir string) {
 	dbDir := rootDir+"/database"
 	file := "db_task.sql"
 	pyFileManager.CreateManyFolders(dbDir)
-	pyFileManager.CreateSigleFile(dbDir, file)
+	pyFileManager.CreateSingleFile(dbDir, file)
 	pyFileManager.WriteFile(dbDir, file, postgres.GetDatabaseScript())
 }
 
@@ -126,7 +126,7 @@ func (python *PythonGenerator) generatePostgresDB(rootDir string) {
 func (python *PythonGenerator) generateRequirements(rootDir string, db string) {
 	var deps *scripts.PythonDeps
 	file := "requirements.txt"
-	pyFileManager.CreateSigleFile(rootDir, file)
+	pyFileManager.CreateSingleFile(rootDir, file)
 	pyFileManager.WriteFile(rootDir, file, deps.Requirements(db))
 }
 
@@ -150,10 +150,10 @@ func (python *PythonGenerator) generateHelpers(rootDir string) {
 	uploaderFile := "file_uploader.py"
 	passwordHandlerFile := "password_handler.py"
 	pyFileManager.CreateManyFolders(helpersFolder)
-	pyFileManager.CreateSigleFile(helpersFolder, httpFile)
-	pyFileManager.CreateSigleFile(helpersFolder, constFile)
-	pyFileManager.CreateSigleFile(helpersFolder, uploaderFile)
-	pyFileManager.CreateSigleFile(helpersFolder, passwordHandlerFile)
+	pyFileManager.CreateSingleFile(helpersFolder, httpFile)
+	pyFileManager.CreateSingleFile(helpersFolder, constFile)
+	pyFileManager.CreateSingleFile(helpersFolder, uploaderFile)
+	pyFileManager.CreateSingleFile(helpersFolder, passwordHandlerFile)
 	pyFileManager.WriteFile(helpersFolder, httpFile, helper.HttpCodes())
 	pyFileManager.WriteFile(helpersFolder, constFile, helper.Constants())
 	pyFileManager.WriteFile(helpersFolder, uploaderFile, helper.FileUploader())
@@ -168,9 +168,9 @@ func (python *PythonGenerator) generateModels(rootDir string) {
 	userFile := "user.py"
 	taskFile := "task.py"
 	pyFileManager.CreateManyFolders(modelsFolder)
-	pyFileManager.CreateSigleFile(modelsFolder, roleFile)
-	pyFileManager.CreateSigleFile(modelsFolder, taskFile)
-	pyFileManager.CreateSigleFile(modelsFolder, userFile)
+	pyFileManager.CreateSingleFile(modelsFolder, roleFile)
+	pyFileManager.CreateSingleFile(modelsFolder, taskFile)
+	pyFileManager.CreateSingleFile(modelsFolder, userFile)
 	pyFileManager.WriteFile(modelsFolder, roleFile, model.RoleModel())
 	pyFileManager.WriteFile(modelsFolder, userFile, model.UserModel())
 	pyFileManager.WriteFile(modelsFolder, taskFile, model.TaskModel())
@@ -201,11 +201,11 @@ func (python *PythonGenerator) generateStaticFiles(rootDir string) {
 	pyFileManager.CreateManyFolders(staticLibBootstrapCss)
 	pyFileManager.CreateManyFolders(staticLibBootstrapJs)
 	pyFileManager.CreateManyFolders(staticLibJquery)
-	pyFileManager.CreateSigleFile(staticCss, cssFile)
-	pyFileManager.CreateSigleFile(staticJs, jsFile)
-	pyFileManager.CreateSigleFile(staticLibBootstrapCss, bootstrapCssFile)
-	pyFileManager.CreateSigleFile(staticLibBootstrapJs, bootstrapJsFile)
-	pyFileManager.CreateSigleFile(staticLibJquery, jqueryJsFile)
+	pyFileManager.CreateSingleFile(staticCss, cssFile)
+	pyFileManager.CreateSingleFile(staticJs, jsFile)
+	pyFileManager.CreateSingleFile(staticLibBootstrapCss, bootstrapCssFile)
+	pyFileManager.CreateSingleFile(staticLibBootstrapJs, bootstrapJsFile)
+	pyFileManager.CreateSingleFile(staticLibJquery, jqueryJsFile)
 	pyFileManager.WriteFile(staticCss, cssFile, staticFile.CssContent())
 	pyFileManager.WriteFile(staticJs, jsFile, staticFile.JsContent())
 	pyFileManager.WriteFile(staticLibBootstrapCss, bootstrapCssFile, bootstrap.BootstrapMinCss())
@@ -223,11 +223,11 @@ func (python *PythonGenerator) generateMvcControllers(rootDir string) {
 	authFile := "auth_controller.py"
 	frontFile := "front_controller.py"
 	pyFileManager.CreateManyFolders(controllersFolder)
-	pyFileManager.CreateSigleFile(controllersFolder, roleFile)
-	pyFileManager.CreateSigleFile(controllersFolder, taskFile)
-	pyFileManager.CreateSigleFile(controllersFolder, userFile)
-	pyFileManager.CreateSigleFile(controllersFolder, authFile)
-	pyFileManager.CreateSigleFile(controllersFolder, frontFile)
+	pyFileManager.CreateSingleFile(controllersFolder, roleFile)
+	pyFileManager.CreateSingleFile(controllersFolder, taskFile)
+	pyFileManager.CreateSingleFile(controllersFolder, userFile)
+	pyFileManager.CreateSingleFile(controllersFolder, authFile)
+	pyFileManager.CreateSingleFile(controllersFolder, frontFile)
 	pyFileManager.WriteFile(controllersFolder, roleFile, mvcController.RoleController())
 	pyFileManager.WriteFile(controllersFolder, userFile, mvcController.UserController())
 	pyFileManager.WriteFile(controllersFolder, taskFile, mvcController.TaskController())
@@ -245,11 +245,11 @@ func (python *PythonGenerator) generateApiControllers(rootDir string) {
 	authFile := "auth_api.py"
 	rootFile := "root_api.py"
 	pyFileManager.CreateManyFolders(apiControllersFolder)
-	pyFileManager.CreateSigleFile(apiControllersFolder, roleFile)
-	pyFileManager.CreateSigleFile(apiControllersFolder, taskFile)
-	pyFileManager.CreateSigleFile(apiControllersFolder, userFile)
-	pyFileManager.CreateSigleFile(apiControllersFolder, authFile)
-	pyFileManager.CreateSigleFile(apiControllersFolder, rootFile)
+	pyFileManager.CreateSingleFile(apiControllersFolder, roleFile)
+	pyFileManager.CreateSingleFile(apiControllersFolder, taskFile)
+	pyFileManager.CreateSingleFile(apiControllersFolder, userFile)
+	pyFileManager.CreateSingleFile(apiControllersFolder, authFile)
+	pyFileManager.CreateSingleFile(apiControllersFolder, rootFile)
 	pyFileManager.WriteFile(apiControllersFolder, roleFile, apiController.RoleApiController())
 	pyFileManager.WriteFile(apiControllersFolder, userFile, apiController.UserApiController())
 	pyFileManager.WriteFile(apiControllersFolder, taskFile, apiController.TaskApiController())
@@ -318,8 +318,8 @@ func (python *PythonGenerator) generateViews(rootDir string) {
 	pyFileManager.CreateManyFolders(taskFolder)
 	pyFileManager.CreateManyFolders(errorFolder)
 	
+	pyFileManager.CreateSingleFile(frontFolder, indexFile)
 	pyFileManager.CreateManyFiles(errorFolder, err404File, err404MenuFile)
-	pyFileManager.CreateSigleFile(frontFolder, indexFile)
 	pyFileManager.CreateManyFiles(authFolder, loginFile, homeFile)
 	pyFileManager.CreateManyFiles(layoutsFolder, frontLayoutFile, backLayoutFile, normalMenuFile, adminMenuFile)
 	pyFileManager.CreateManyFiles(roleFolder, roleAddFile, roleShowFile, roleDetailsFile)
